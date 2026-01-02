@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="/static/tasks.css">
+</head>
+<body>
+
+<div class="page">
+
+    <h1>My Tasks</h1>
+
+    <div class="actions">
+        <a href="/create" class="btn create">Create Task</a>
+        <a href="/delete" class="btn delete">Delete Tasks</a>
+    </div>
+
+    {% if tasks %}
+
+    <div class="tasks-container">
+        {% for task in tasks %}
+        <div class="task-card {% if task.completed %}completed{% endif %}">
+            <h2>{{ task.title }}</h2>
+            <p>{{ task.description }}</p>
+
+            <span class="status">
+                {% if task.completed %}
+                    ✅ Completed
+                {% else %}
+                    ⏳ Pending
+                {% endif %}
+            </span>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+        <p>No tasks available.</p>
+        <a href="/create" class="btn create">Create your first task</a>
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

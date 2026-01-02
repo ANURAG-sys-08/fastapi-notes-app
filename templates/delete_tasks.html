@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Tasks</title>
+    <link rel="stylesheet" href="/static/delete_tasks.css">
+</head>
+<body>
+
+    <h1>Delete Tasks</h1>
+
+    <div class="tasks-container">
+        {% for task in tasks %}
+        <div class="task-card">
+
+            <div class="task-info">
+                <h2>{{ task.title }}</h2>
+                <p>{{ task.description }}</p>
+
+                <span class="status">
+                    {% if task.completed %}
+                        ✅ Completed
+                    {% else %}
+                        ⏳ Pending
+                    {% endif %}
+                </span>
+            </div>
+
+            <form method="post" action="/tasks/delete">
+                <input type="hidden" name="task_id" value="{{ task.id }}">
+                <button type="submit" class="delete-btn">
+                    Delete
+                </button>
+            </form>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
